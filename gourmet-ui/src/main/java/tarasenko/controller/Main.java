@@ -2,15 +2,15 @@ package tarasenko.controller;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import tarasenko.service.IngredientService;
-import tarasenko.service.UserService;
+import tarasenko.IngredientService;
+import tarasenko.UserService;
 
 /**
  * @author tarasenko
  * @since 01.06.2016
  */
 public class Main {
-    private static
+
 
     public static void main(String[] args) {
         ApplicationContext appContext =

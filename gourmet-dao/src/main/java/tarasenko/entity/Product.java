@@ -1,4 +1,4 @@
-package tarasenko.dao.entity;
+package tarasenko.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

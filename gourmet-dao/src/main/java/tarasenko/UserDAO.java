@@ -1,6 +1,6 @@
-package tarasenko.dao;
+package tarasenko;
 
-import tarasenko.dao.entity.User;
+import tarasenko.entity.User;
 
 import java.util.List;
 

@@ -1,10 +1,9 @@
-package tarasenko.service;
+package tarasenko;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tarasenko.dao.IngredientDAO;
-import tarasenko.dao.entity.Ingredient;
+import tarasenko.entity.Ingredient;
 
 /**
  * @author tarasenko

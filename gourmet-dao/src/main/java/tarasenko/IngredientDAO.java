@@ -1,6 +1,6 @@
-package tarasenko.dao;
+package tarasenko;
 
-import tarasenko.dao.entity.Ingredient;
+import tarasenko.entity.Ingredient;
 
 import java.util.List;
 

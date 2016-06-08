@@ -1,9 +1,9 @@
-package tarasenko.dao.impl;
+package tarasenko.impl;
 
 import org.springframework.stereotype.Repository;
-import tarasenko.dao.AbstractDAO;
-import tarasenko.dao.IngredientDAO;
-import tarasenko.dao.entity.Ingredient;
+import tarasenko.AbstractDAO;
+import tarasenko.IngredientDAO;
+import tarasenko.entity.Ingredient;
 
 import java.util.List;
 

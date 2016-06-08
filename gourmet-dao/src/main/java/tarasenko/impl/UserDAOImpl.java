@@ -1,10 +1,9 @@
-package tarasenko.dao.impl;
+package tarasenko.impl;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import tarasenko.dao.AbstractDAO;
-import tarasenko.dao.UserDAO;
-import tarasenko.dao.entity.User;
+import tarasenko.AbstractDAO;
+import tarasenko.UserDAO;
+import tarasenko.entity.User;
 
 import java.util.List;
 

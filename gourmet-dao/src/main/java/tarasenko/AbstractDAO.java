@@ -1,4 +1,4 @@
-package tarasenko.dao;
+package tarasenko;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
