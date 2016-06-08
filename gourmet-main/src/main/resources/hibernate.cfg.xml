@@ -13,5 +13,9 @@
 
         <!--Mapping-->
         <mapping class="tarasenko.dao.entity.User"/>
+        <mapping class="tarasenko.dao.entity.Ingredient"/>
+        <mapping class="tarasenko.dao.entity.Product"/>
+        <mapping class="tarasenko.dao.entity.Recipe"/>
+        <mapping class="tarasenko.dao.entity.RecipeInfo"/>
     </session-factory>
 </hibernate-configuration>

@@ -13,7 +13,6 @@ import java.util.List;
  * @since 01.06.2016
  */
 @Repository
-@Transactional
 public class UserDAOImpl extends AbstractDAO<Long, User> implements UserDAO {
 
     @Override

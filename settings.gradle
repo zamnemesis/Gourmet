@@ -1,0 +1,5 @@
+rootProject.name = 'gourmet'
+include 'gourmet-dao'
+include 'gourmet-main'
+include 'gourmet-service'
+

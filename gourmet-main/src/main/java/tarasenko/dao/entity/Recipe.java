@@ -1,6 +1,7 @@
 package tarasenko.dao.entity;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.List;
 
 /**
@@ -8,16 +9,43 @@ import java.util.List;
  * @since 01.06.2016
  */
 @Entity
+@Table
 public class Recipe {
+    @Id
+    @Column
     private Long id;
+
+    @Column
     private String name;
+
+    @Column
     private String instruction;
+
+    @XmlTransient
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "cuisineid")
     private List<Ingredient> ingredients;
+
+    @XmlTransient
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "cuisineid")
     private String cuisine;
+
+    @XmlTransient
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "categoryid")
     private String category;
-    private String portion;
-    private Integer cookingTime;
+
+    @XmlTransient
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "preferenceid")
     private String preference;
+
+    @Column
+    private String portion;
+
+    @Column(name = "time")
+    private Integer cookingTime;
 
     public Long getId() {
         return id;
