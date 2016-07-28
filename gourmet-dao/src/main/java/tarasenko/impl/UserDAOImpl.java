@@ -12,10 +12,10 @@ import java.util.List;
  * @since 01.06.2016
  */
 @Repository
-public class UserDAOImpl extends AbstractDAO<Long, User> implements UserDAO {
+public class UserDAOImpl extends AbstractDAO<String, User> implements UserDAO {
 
     @Override
-    public User findById(Long id) {
+    public User findById(String id) {
         return getByKey(id);
     }
 
@@ -30,12 +30,12 @@ public class UserDAOImpl extends AbstractDAO<Long, User> implements UserDAO {
     }
 
     @Override
-    public void deleteUserById(Long id) {
+    public void deleteUserById(String id) {
 
     }
 
     @Override
     public List<User> findAllUsers() {
-        return null;
+        return findAll();
     }
 }

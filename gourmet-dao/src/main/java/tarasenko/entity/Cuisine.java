@@ -7,13 +7,13 @@ import javax.persistence.Table;
 
 /**
  * @author tarasenko
- * @since 31.05.2016
+ * @since 22.07.2016
  */
 @Entity
 @Table
-public class Product {
+public class Cuisine {
     @Id
-    @Column(name = "product_id")
+    @Column(name = "cuisine_id")
     private String id;
 
     @Column
@@ -22,20 +22,20 @@ public class Product {
     @Column
     private String description;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
@@ -48,8 +48,8 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + id +
+        return "Cuisine{" +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 '}';

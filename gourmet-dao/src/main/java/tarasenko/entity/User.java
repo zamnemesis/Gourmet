@@ -10,21 +10,23 @@ import javax.persistence.Table;
  * @since 01.06.2016
  */
 @Entity
-@Table
-public class User {
+@Table(name = "users")
+public class User extends BaseEntity {
     @Id
-    @Column
-    private Long id;
+    @Column(name = "user_id")
+    private String id;
+
     @Column
     private String login;
+
     @Column
     private String password;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -42,5 +44,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

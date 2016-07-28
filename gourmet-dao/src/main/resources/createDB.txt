@@ -1,112 +1,134 @@
-CREATE SCHEMA `gourmet` DEFAULT CHARACTER SET utf8 ;
+CREATE TABLE gourmet.users
+(
+  user_id text NOT NULL,
+  login text NOT NULL,
+  password text NOT NULL,
+  CONSTRAINT user_pkey PRIMARY KEY (user_id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE gourmet.users
+  OWNER TO postgres;
 
-CREATE TABLE `gourmet`.`user` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `login` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`));
-  
-CREATE TABLE `gourmet`.`product` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`));
-
- CREATE TABLE `gourmet`.`cuisine` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`));
-
- CREATE TABLE `gourmet`.`category` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`));
-
- CREATE TABLE `gourmet`.`preference` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`));
-
-  CREATE TABLE `gourmet`.`ingredient` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `productid` INT NOT NULL,
-  `amount` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`),
-  INDEX `id_idx` (`productid` ASC),
-  CONSTRAINT `id`
-    FOREIGN KEY (`productid`)
-    REFERENCES `gourmet`.`product` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION);
-
- CREATE TABLE `gourmet`.`recipe` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NULL,
-  `instruction` VARCHAR(45) NULL,
-  `time` INT NULL,
-  `recipecol` VARCHAR(45) NULL,
-  `portion` INT NULL,
-  `preferenceid` INT NULL,
-  `cuisineid` INT NULL,
-  `categoryid` INT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `cuisineid_idx` (`cuisineid` ASC),
-  INDEX `categoryid_idx` (`categoryid` ASC),
-  INDEX `preferenceid_idx` (`preferenceid` ASC),
-  CONSTRAINT `cuisineid`
-    FOREIGN KEY (`cuisineid`)
-    REFERENCES `gourmet`.`cuisine` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `categoryid`
-    FOREIGN KEY (`categoryid`)
-    REFERENCES `gourmet`.`category` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `preferenceid`
-    FOREIGN KEY (`preferenceid`)
-    REFERENCES `gourmet`.`preference` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
- CREATE TABLE `gourmet`.`ingredientrecipe` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `recipeid` INT NOT NULL,
-  `ingredientid` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `ingredientid_idx` (`ingredientid` ASC),
-  INDEX `recipeid_idx` (`recipeid` ASC),
-  CONSTRAINT `recipeid`
-    FOREIGN KEY (`recipeid`)
-    REFERENCES `gourmet`.`recipe` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `ingredientid`
-    FOREIGN KEY (`ingredientid`)
-    REFERENCES `gourmet`.`ingredient` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
- CREATE TABLE `gourmet`.`recipeinfo` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `recipeid` INT NOT NULL,
-  `userid` INT NOT NULL,
-  `createdate` DATE NULL,
-  `editdate` DATE NULL,
-  PRIMARY KEY (`id`));
+CREATE TABLE gourmet.category
+(
+  category_id text NOT NULL,
+  name text NOT NULL,
+  CONSTRAINT category_pkey PRIMARY KEY (category_id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE gourmet.category
+  OWNER TO postgres;
 
 
-INSERT INTO `gourmet`.`user` VALUES ('1', 'login','pass');
+  CREATE TABLE gourmet.cuisine
+(
+  cuisine_id text NOT NULL,
+  name text NOT NULL,
+  description text,
+  CONSTRAINT cuisine_pkey PRIMARY KEY (cuisine_id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE gourmet.cuisine
+  OWNER TO postgres;
 
-INSERT INTO `gourmet`.`product` (`name`) VALUES ('potato');
-INSERT INTO `gourmet`.`product` (`name`) VALUES ('tomato');
-INSERT INTO `gourmet`.`product` (`name`) VALUES ('bell pepper');
-INSERT INTO `gourmet`.`product` (`name`) VALUES ('bow');
-INSERT INTO `gourmet`.`product` (`name`) VALUES ('carrot');
-INSERT INTO `gourmet`.`product` (`name`) VALUES ('rice');
-INSERT INTO `gourmet`.`product` (`name`) VALUES ('cucumber');
-INSERT INTO `gourmet`.`product` (`name`) VALUES ('olive');
-INSERT INTO `gourmet`.`product` (`name`) VALUES ('pepper');
-INSERT INTO `gourmet`.`product` (`name`) VALUES ('Chees Feta');
-INSERT INTO `gourmet`.`product` (`name`) VALUES ('Olive oil');
-INSERT INTO `gourmet`.`product` (`name`) VALUES ('salt');
-INSERT INTO `gourmet`.`product` (`name`) VALUES ('Red onion');
+
+   CREATE TABLE gourmet.preference
+(
+  preference_id text NOT NULL,
+  name text NOT NULL,
+  CONSTRAINT preference_pkey PRIMARY KEY (preference_id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE gourmet.preference
+  OWNER TO postgres;
+
+
+  CREATE TABLE gourmet.product
+(
+  product_id text NOT NULL,
+  name text NOT NULL,
+  description text,
+  CONSTRAINT product_pkey PRIMARY KEY (product_id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE gourmet.product
+  OWNER TO postgres;
+
+
+  CREATE TABLE gourmet.recipe
+(
+  recipe_id text NOT NULL,
+  name text NOT NULL,
+  instruction text NOT NULL,
+  "time" integer,
+  recipecol text,
+  portion integer,
+  preference_id text,
+  cuisine_id text,
+  category_id text,
+  CONSTRAINT recipe_pkey PRIMARY KEY (recipe_id),
+  CONSTRAINT recipe_categoty_id_fkey FOREIGN KEY (categoty_id)
+      REFERENCES gourmet.category (category_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT recipe_cuisine_id_fkey FOREIGN KEY (cuisine_id)
+      REFERENCES gourmet.cuisine (cuisine_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT recipe_preference_id_fkey FOREIGN KEY (preference_id)
+      REFERENCES gourmet.preference (preference_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE gourmet.recipe
+  OWNER TO postgres;
+
+
+  CREATE TABLE gourmet.ingredient
+(
+  ingredient_id text NOT NULL,
+  product_id text NOT NULL,
+  recipe_id text NOT NULL,
+  amount text,
+  CONSTRAINT ingredient_pkey PRIMARY KEY (ingredient_id),
+  CONSTRAINT ingredient_product_id_fkey FOREIGN KEY (product_id)
+      REFERENCES gourmet.product (product_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT ingredient_recipe_id_fkey FOREIGN KEY (recipe_id)
+      REFERENCES gourmet.recipe (recipe_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE gourmet.ingredient
+  OWNER TO postgres;
+
+
+
+  CREATE TABLE gourmet.recipe_info
+(
+  recipe_info_id text NOT NULL,
+  user_id text NOT NULL,
+  create_date date,
+  edit_date date,
+  CONSTRAINT recipe_info_pkey PRIMARY KEY (recipe_info_id),
+  CONSTRAINT recipe_info_user_id_fkey FOREIGN KEY (user_id)
+      REFERENCES gourmet.users (user_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE gourmet.recipe_info
+  OWNER TO postgres;

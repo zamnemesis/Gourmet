@@ -9,13 +9,13 @@ import java.util.List;
  * @since 06.06.2016
  */
 public interface IngredientDAO {
-    Ingredient findById(Long id);
+    Ingredient findById(String id);
 
-    void saveUser(Ingredient User);
+    void saveIngredient(Ingredient ingredient);
 
-    void updateUser(Ingredient User);
+    void updateIngredient(Ingredient ingredient);
 
-    void deleteUserById(Long id);
+    void deleteIngredient(Ingredient ingredient);
 
     List<Ingredient> findAllIngredients();
 }

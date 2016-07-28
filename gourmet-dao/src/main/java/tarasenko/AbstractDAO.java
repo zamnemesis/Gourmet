@@ -2,11 +2,19 @@ package tarasenko;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 /**
  * @author tarasenko
@@ -21,26 +29,44 @@ public abstract class AbstractDAO<PK extends Serializable, T> {
     }
 
     @Autowired
-    private SessionFactory sessionFactory;
-
-    protected Session getSession() {
-        return sessionFactory.getCurrentSession();
-    }
+    private EntityManager entityManager;
 
     @SuppressWarnings("unchecked")
     public T getByKey(PK key) {
-        return (T) getSession().get(persistentClass, key);
+        return (T) entityManager.find(persistentClass, key);
     }
 
     public void persist(T entity) {
-        getSession().persist(entity);
+        entityManager.persist(entity);
     }
 
     public void delete(T entity) {
-        getSession().delete(entity);
+        entityManager.remove(entity);
     }
 
-    protected Criteria createEntityCriteria() {
-        return getSession().createCriteria(persistentClass);
+    public void deleteById(PK key) {
+//        CriteriaDelete<T> criteriaDelete = getTCriteriaDelete();
+//        Root<T> rootEntry = criteriaDelete.from(persistentClass);
+//        criteriaDelete.where(rootEntry.);
+//        entityManager.createQuery(criteriaDelete);
+    }
+
+    public List<T> findAll() {
+        CriteriaQuery<T> criteriaQuery = getCriteriaQuery();
+        Root<T> rootEntry;
+        rootEntry = criteriaQuery.from(persistentClass);
+        CriteriaQuery<T> all = criteriaQuery.select(rootEntry);
+        TypedQuery<T> allQuery = entityManager.createQuery(all);
+        return allQuery.getResultList();
+    }
+
+    protected CriteriaQuery<T> getCriteriaQuery() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        return criteriaBuilder.createQuery(persistentClass);
+    }
+
+    protected CriteriaDelete<T> getCriteriaDelete() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        return criteriaBuilder.createCriteriaDelete(persistentClass);
     }
 }

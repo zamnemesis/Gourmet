@@ -7,28 +7,17 @@ import javax.persistence.Table;
 
 /**
  * @author tarasenko
- * @since 31.05.2016
+ * @since 22.07.2016
  */
 @Entity
 @Table
-public class Product {
+public class Preference {
     @Id
-    @Column(name = "product_id")
+    @Column(name = "preference_id")
     private String id;
 
     @Column
     private String name;
-
-    @Column
-    private String description;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getId() {
         return id;
@@ -38,20 +27,19 @@ public class Product {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + id +
+        return "Preference{" +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
                 '}';
     }
 }

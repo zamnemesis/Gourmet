@@ -12,30 +12,30 @@ import java.util.List;
  * @since 06.06.2016
  */
 @Repository
-public class IngredientDAOImpl extends AbstractDAO<Long, Ingredient> implements IngredientDAO {
+public class IngredientDAOImpl extends AbstractDAO<String, Ingredient> implements IngredientDAO{
 
     @Override
-    public Ingredient findById(Long id) {
+    public Ingredient findById(String id) {
         return getByKey(id);
     }
 
     @Override
-    public void saveUser(Ingredient User) {
+    public void saveIngredient(Ingredient ingredient) {
 
     }
 
     @Override
-    public void updateUser(Ingredient User) {
+    public void updateIngredient(Ingredient ingredient) {
 
     }
 
     @Override
-    public void deleteUserById(Long id) {
-
+    public void deleteIngredient(Ingredient ingredient) {
+        delete(ingredient);
     }
 
     @Override
     public List<Ingredient> findAllIngredients() {
-        return null;
+        return findAll();
     }
 }

@@ -12,8 +12,8 @@ import java.util.List;
 @Table
 public class Recipe {
     @Id
-    @Column
-    private Long id;
+    @Column (name = "recipe_id")
+    private String id;
 
     @Column
     private String name;
@@ -21,25 +21,21 @@ public class Recipe {
     @Column
     private String instruction;
 
-    @XmlTransient
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "cuisineid")
+    @OneToMany
+    @JoinColumn(name = "ingredient_id")
     private List<Ingredient> ingredients;
 
-    @XmlTransient
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "cuisineid")
-    private String cuisine;
+    @ManyToOne
+    @JoinColumn(name = "cuisine_id")
+    private Cuisine cuisine;
 
-    @XmlTransient
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "categoryid")
-    private String category;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
-    @XmlTransient
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "preferenceid")
-    private String preference;
+    @ManyToOne
+    @JoinColumn(name = "preference_id")
+    private Preference preference;
 
     @Column
     private String portion;
@@ -47,11 +43,11 @@ public class Recipe {
     @Column(name = "time")
     private Integer cookingTime;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -71,28 +67,28 @@ public class Recipe {
         this.instruction = instruction;
     }
 
-    public List<Ingredient> getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    public String getCuisine() {
+    public Cuisine getCuisine() {
         return cuisine;
     }
 
-    public void setCuisine(String cuisine) {
+    public void setCuisine(Cuisine cuisine) {
         this.cuisine = cuisine;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Preference getPreference() {
+        return preference;
+    }
+
+    public void setPreference(Preference preference) {
+        this.preference = preference;
     }
 
     public String getPortion() {
@@ -111,11 +107,18 @@ public class Recipe {
         this.cookingTime = cookingTime;
     }
 
-    public String getPreference() {
-        return preference;
-    }
-
-    public void setPreference(String preference) {
-        this.preference = preference;
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", instruction='" + instruction + '\'' +
+                ", ingredients=" + ingredients +
+                ", cuisine=" + cuisine +
+                ", category=" + category +
+                ", preference=" + preference +
+                ", portion='" + portion + '\'' +
+                ", cookingTime=" + cookingTime +
+                '}';
     }
 }

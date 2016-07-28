@@ -1,7 +1,6 @@
 package tarasenko.entity;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author tarasenko
@@ -11,13 +10,16 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table
 public class Ingredient {
     @Id
-    @Column
-    private Long id;
+    @Column(name = "ingredient_id")
+    private String id;
 
-    @XmlTransient
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "productid")
+    @ManyToOne
+    @JoinColumn(name = "product_id")
     private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "recipe_id")
+    private Recipe recipe;
 
     @Column
     private String amount;
@@ -38,19 +40,21 @@ public class Ingredient {
         this.amount = amount;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
     @Override
     public String toString() {
         return "Ingredient{" +
-                "amount='" + amount + '\'' +
-                ", productName=" + product.getName() +
+                "id='" + id + '\'' +
+                ", product=" + product.getName() +
+                ", recipe=" + recipe.getName() +
+                ", amount='" + amount + '\'' +
                 '}';
     }
 }
