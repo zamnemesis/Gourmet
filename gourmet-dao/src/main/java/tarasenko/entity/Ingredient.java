@@ -8,16 +8,16 @@ import javax.persistence.*;
  */
 @Entity
 @Table
-public class Ingredient {
+public class Ingredient extends BaseEntity{
     @Id
     @Column(name = "ingredient_id")
     private String id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "recipe_id")
     private Recipe recipe;
 
@@ -52,8 +52,8 @@ public class Ingredient {
     public String toString() {
         return "Ingredient{" +
                 "id='" + id + '\'' +
-                ", product=" + product.getName() +
-                ", recipe=" + recipe.getName() +
+                ", product=\"" + product.getName() + "\"" +
+                ", recipe=\"" + recipe.getName() + "\"" +
                 ", amount='" + amount + '\'' +
                 '}';
     }

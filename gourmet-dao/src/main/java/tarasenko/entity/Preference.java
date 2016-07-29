@@ -11,7 +11,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table
-public class Preference {
+public class Preference extends BaseEntity{
     @Id
     @Column(name = "preference_id")
     private String id;

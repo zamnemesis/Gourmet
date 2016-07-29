@@ -28,4 +28,8 @@ public class UserService {
     public List<User> getUsers() {
         return userDAO.findAllUsers();
     }
+
+    public void deleteUser(User user) {
+        userDAO.deleteUser(user);
+    }
 }

@@ -2,6 +2,7 @@ package tarasenko.entity;
 
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
@@ -9,7 +10,7 @@ import java.util.UUID;
  * @since 21.07.2016
  */
 @MappedSuperclass
-public abstract class BaseEntity {
+public abstract class BaseEntity implements Serializable, Cloneable{
 
     @PrePersist
     public void prePersist() {

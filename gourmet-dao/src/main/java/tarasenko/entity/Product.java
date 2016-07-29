@@ -11,7 +11,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table
-public class Product {
+public class Product extends BaseEntity{
     @Id
     @Column(name = "product_id")
     private String id;

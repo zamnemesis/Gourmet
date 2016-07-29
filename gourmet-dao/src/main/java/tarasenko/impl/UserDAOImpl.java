@@ -30,8 +30,8 @@ public class UserDAOImpl extends AbstractDAO<String, User> implements UserDAO {
     }
 
     @Override
-    public void deleteUserById(String id) {
-
+    public void deleteUser(User user) {
+        delete(user);
     }
 
     @Override

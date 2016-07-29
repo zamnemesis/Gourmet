@@ -41,21 +41,18 @@ public class Main {
         for (Category category : categoryList) {
             System.out.println(category);
         }
-
         System.out.println();
 
         List<Preference> preferenceList = preferenceService.getPreferences();
         for (Preference preference : preferenceList) {
             System.out.println(preference);
         }
-
         System.out.println();
 
         List<Product> productList = productService.getProducts();
         for (Product product : productList) {
             System.out.println(product);
         }
-
         System.out.println();
 
         List<Recipe> recipeList = recipeService.getRecipes();

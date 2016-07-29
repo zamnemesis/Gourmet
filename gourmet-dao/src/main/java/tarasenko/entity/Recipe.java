@@ -1,7 +1,8 @@
 package tarasenko.entity;
 
+import org.hibernate.annotations.Fetch;
+
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.List;
 
 /**
@@ -10,9 +11,9 @@ import java.util.List;
  */
 @Entity
 @Table
-public class Recipe {
+public class Recipe extends BaseEntity{
     @Id
-    @Column (name = "recipe_id")
+    @Column(name = "recipe_id")
     private String id;
 
     @Column
@@ -21,19 +22,20 @@ public class Recipe {
     @Column
     private String instruction;
 
-    @OneToMany
-    @JoinColumn(name = "ingredient_id")
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "recipe_id")
+    @Fetch(value = org.hibernate.annotations.FetchMode.SELECT)
     private List<Ingredient> ingredients;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cuisine_id")
     private Cuisine cuisine;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "preference_id")
     private Preference preference;
 
@@ -107,16 +109,24 @@ public class Recipe {
         this.cookingTime = cookingTime;
     }
 
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
     @Override
     public String toString() {
         return "Recipe{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", instruction='" + instruction + '\'' +
-                ", ingredients=" + ingredients +
-                ", cuisine=" + cuisine +
-                ", category=" + category +
-                ", preference=" + preference +
+                ", ingredients=" + ingredients.toString() +
+                ", cuisine=" + cuisine.getName() +
+                ", category=" + category.getName() +
+                ", preference=" + preference.getName() +
                 ", portion='" + portion + '\'' +
                 ", cookingTime=" + cookingTime +
                 '}';
