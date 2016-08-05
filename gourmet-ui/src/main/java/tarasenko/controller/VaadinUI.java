@@ -1,14 +1,12 @@
 package tarasenko.controller;
 
 import com.vaadin.annotations.Theme;
+import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.spring.annotation.SpringComponent;
-import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.*;
+import org.springframework.stereotype.Component;
 import tarasenko.UserService;
 import tarasenko.editor.UserEditor;
 import tarasenko.entity.User;
@@ -17,14 +15,14 @@ import tarasenko.entity.User;
  * @author tarasenko
  * @since 28.07.2016
  */
-@SpringUI
+@Component
 @Theme("valo")
 public class VaadinUI extends UI {
 
     @Autowired
     private UserService userService;
-
-    private UserEditor editor = new UserEditor();
+    @Autowired
+    private UserEditor editor;
 
     private Grid grid = new Grid();
 
@@ -44,7 +42,8 @@ public class VaadinUI extends UI {
         mainLayout.setMargin(true);
         mainLayout.setSpacing(true);
 
-        grid.setHeight(300, Unit.PIXELS);
+        grid.setHeight(600, Unit.PIXELS);
+        grid.setWidth(900, Unit.PIXELS);
 //        grid.setColumns("id", "firstName", "lastName");
 
         filter.setInputPrompt("Filter by last name");
@@ -73,14 +72,12 @@ public class VaadinUI extends UI {
         });
 
         // Initialize listing
-//        listCustomers(null);
+        userList();
     }
 
-//    @Autowired
-//    public VaadinUI(UserEditor editor) {
-//        this.editor = editor;
-//        this.grid = new Grid();
-//        this.filter = new TextField();
-//        this.addNewBtn = new Button("New user", FontAwesome.PLUS);
-//    }
+
+    private void userList() {
+            grid.setContainerDataSource(new BeanItemContainer(User.class,
+                    userService.getUsers()));
+    }
 }

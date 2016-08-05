@@ -20,16 +20,17 @@ import tarasenko.entity.User;
  * @author tarasenko
  * @since 28.07.2016
  */
-@SpringComponent
-@UIScope
+//@SpringComponent
+//@UIScope
+@Component
 public class UserEditor extends VerticalLayout {
     @Autowired
     private UserService userService;
 
     private User user;
 
-    TextField firstName = new TextField("First name");
-    TextField lastName = new TextField("Last name");
+    TextField login = new TextField("Login");
+    TextField password = new TextField("Password");
 
     /* Action buttons */
     Button save = new Button("Save", FontAwesome.SAVE);
@@ -39,7 +40,7 @@ public class UserEditor extends VerticalLayout {
 
     public UserEditor() {
 
-        addComponents(firstName, lastName, actions);
+        addComponents(login, password, actions);
 
         // Configure and style components
         setSpacing(true);
@@ -79,7 +80,7 @@ public class UserEditor extends VerticalLayout {
         // A hack to ensure the whole form is visible
         save.focus();
         // Select all text in firstName field automatically
-        firstName.selectAll();
+        login.selectAll();
     }
 
     public void setChangeHandler(ChangeHandler h) {

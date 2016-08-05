@@ -17,7 +17,7 @@
         <!--</init-param>-->
         <init-param>
             <param-name>beanName</param-name>
-            <param-value>VaadinUI</param-value>
+            <param-value>vaadinUI</param-value>
         </init-param>
         <init-param>
             <param-name>UI</param-name>
