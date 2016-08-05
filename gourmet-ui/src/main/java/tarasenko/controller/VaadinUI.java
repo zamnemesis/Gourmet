@@ -3,9 +3,12 @@ package tarasenko.controller;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.*;
 import tarasenko.UserService;
 import tarasenko.editor.UserEditor;
 import tarasenko.entity.User;
@@ -21,13 +24,13 @@ public class VaadinUI extends UI {
     @Autowired
     private UserService userService;
 
-    private final UserEditor editor;
+    private UserEditor editor = new UserEditor();
 
-    private final Grid grid;
+    private Grid grid = new Grid();
 
-    private final TextField filter;
+    private TextField filter = new TextField();
 
-    private final Button addNewBtn;
+    private Button addNewBtn = new Button("New user", FontAwesome.PLUS);
 
     @Override
     protected void init(VaadinRequest request) {
@@ -73,11 +76,11 @@ public class VaadinUI extends UI {
 //        listCustomers(null);
     }
 
-    @Autowired
-    public VaadinUI(UserEditor editor) {
-        this.editor = editor;
-        this.grid = new Grid();
-        this.filter = new TextField();
-        this.addNewBtn = new Button("New user", FontAwesome.PLUS);
-    }
+//    @Autowired
+//    public VaadinUI(UserEditor editor) {
+//        this.editor = editor;
+//        this.grid = new Grid();
+//        this.filter = new TextField();
+//        this.addNewBtn = new Button("New user", FontAwesome.PLUS);
+//    }
 }

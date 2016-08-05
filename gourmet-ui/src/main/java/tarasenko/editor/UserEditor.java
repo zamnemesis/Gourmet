@@ -12,6 +12,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import tarasenko.UserService;
 import tarasenko.entity.User;
 
@@ -36,7 +37,6 @@ public class UserEditor extends VerticalLayout {
     Button delete = new Button("Delete", FontAwesome.TRASH_O);
     CssLayout actions = new CssLayout(save, cancel, delete);
 
-    @Autowired
     public UserEditor() {
 
         addComponents(firstName, lastName, actions);
@@ -55,7 +55,6 @@ public class UserEditor extends VerticalLayout {
     }
 
     public interface ChangeHandler {
-
         void onChange();
     }
 

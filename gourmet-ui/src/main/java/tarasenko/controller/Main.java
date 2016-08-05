@@ -7,8 +7,6 @@ import tarasenko.entity.*;
 
 import java.util.List;
 
-import static javafx.scene.input.KeyCode.T;
-
 /**
  * @author tarasenko
  * @since 01.06.2016

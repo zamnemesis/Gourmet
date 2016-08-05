@@ -1,22 +1,26 @@
 package tarasenko.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  * @author tarasenko
  * @since 01.06.2016
  */
-@Entity
-public class RecipeInfo {
-    private Long id;
+//@Entity
+public class RecipeInfo extends BaseEntity{
+//    @Id
+    private String id;
+
     private Long recipeId;
+
     private Long userId;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
